@@ -1,4 +1,8 @@
-<form class="rounded-xl overflow-hidden bg-white">
+<form
+  class="rounded-xl overflow-hidden bg-white"
+  [formGroup]="taskForm"
+  (ngSubmit)="onFormSubmit()"
+>
   <div class="flex gap-1 items-center p-4">
     <img src="/images/icon-new-task.svg" alt="" />
     <h1 class="font-semibold text-lg">
@@ -16,10 +20,14 @@
         name=""
         id=""
         placeholder="Descreva o que deverá ser feito"
+        formControlName="name"
       />
+
+      @if (taskForm.get('name')?.touched && taskForm.get('name')?.invalid) {
       <p class="font-semibold text-sm text-red-500">
         O campo é obrigatório e precisa ter no mínimo 10 caracteres
       </p>
+      }
     </div>
     <div>
       <p class="font-semibold text-sm mb-2">Descrição</p>
@@ -29,10 +37,14 @@
         name=""
         id=""
         placeholder="Adicione uma descrição"
+        formControlName="description"
       />
+      @if (taskForm.get('description')?.touched &&
+      taskForm.get('description')?.invalid) {
       <p class="font-semibold text-sm text-red-500">
         O campo é obrigatório e precisa ter no mínimo 10 caracteres
       </p>
+      }
     </div>
   </div>
 
@@ -43,10 +55,12 @@
     >
       Cancelar
     </button>
+
     <button
-      class="py-3 px-4 bg-[#2A89EF] rounded-xl text-sm font-semibold cursor-pointer active:translate-y-1 text-white transition-transform duration-75 shadow-md shadow-blue-500/50"
-      type="button"
+      class="{{`py-3 px-4 rounded-xl text-white text-sm font-semibold cursor-pointer ${
+      taskForm.invalid ? 'bg-[#D7D8D8]' : 'bg-[#2A89EF] active:translate-y-1 transition-transform duration-75 shadow-md shadow-blue-500/50'}`}}"
       type="submit"
+      [disabled]="taskForm.invalid"
     >
       {{ _data.mode === "create" ? "Criar uma tarefa " : "Salvar Alterações" }}
     </button>
