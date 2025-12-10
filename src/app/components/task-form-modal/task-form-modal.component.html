@@ -8,7 +8,12 @@
     <h1 class="font-semibold text-lg">
       {{ _data.mode === "create" ? "Criar " : "Editar " }} Tarefa
     </h1>
-    <img class="ml-auto cursor-pointer" src="/images/icon-close.svg" alt="" />
+    <img
+      class="ml-auto cursor-pointer"
+      src="/images/icon-close.svg"
+      alt=""
+      (click)="closeModal()"
+    />
   </div>
 
   <div class="p-4 border-y border-[#D1D5DB] flex flex-col gap-4">
@@ -50,6 +55,7 @@
 
   <div class="p-4 flex justify-end gap-2">
     <button
+      (click)="closeModal()"
       class="py-3 px-4 bg-[#FAFAFA] rounded-xl text-sm font-semibold cursor-pointer active:translate-y-1 transition-transform duration-75"
       type="button"
     >
