@@ -29,8 +29,8 @@ export class ModalControllerService {
     });
   }
 
-  openEditTaskModal<ItaskFormControls>(formValues: ItaskFormControls) {
-    return this._dialog.open(TaskFormModalComponent, {
+  openEditTaskModal(formValues: ItaskFormControls) {
+    return this._dialog.open<ItaskFormControls>(TaskFormModalComponent, {
       ...this.modalSizeOptions,
       disableClose: true,
       data: {
